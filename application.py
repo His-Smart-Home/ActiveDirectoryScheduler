@@ -45,8 +45,10 @@ class SchedulerApp:
             im = Image.open(io.BytesIO(raw_data))
             im = im.resize((344, 64), Image.Resampling.LANCZOS)
             self.logo = ImageTk.PhotoImage(im)
-            logo_label = ttk.Label(self.root, image=self.logo)
+            logo_label = ttk.Label(self.root, image=self.logo, cursor="hand2")
             logo_label.pack(pady=(10, 0))
+            logo_label.bind("<Button-1>", self.on_logo_click)
+
         except Exception as e:
             print(f"Error loading logo: {e}")
 
@@ -71,6 +73,10 @@ class SchedulerApp:
 
         save_btn = ttk.Button(btn_frame, text="Save CSV", command=self.save_csv)
         save_btn.pack(side=tk.LEFT, padx=5)
+
+    def on_logo_click(self, event=None):
+        messagebox.showinfo("About", "Active Directory Scheduler\nPowered by His Smart Home\nOriginal idea by Ben Morrell\nCoded to life by NJ Bendall")
+
 
     def load_last_csv(self):
         if os.path.exists(SETTINGS_FILE):
