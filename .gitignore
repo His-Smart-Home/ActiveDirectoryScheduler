@@ -1,2 +1,2 @@
-schedule.csv
-settings.json
+*.csv
+*.json
